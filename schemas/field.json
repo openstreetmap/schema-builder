@@ -344,6 +344,34 @@
             "pattern": "^\\{.+\\}$",
             "description": "An string referencing another preset which has a locationSet"
         },
+        "optionsLocationSet": {
+            "description": "Per-option locationSets (combo fields only). Keys must match entries in `options`/`strings.options`; an option with no entry here is offered everywhere. See: https://github.com/ideditor/location-conflation",
+            "type": "object",
+            "minProperties": 1,
+            "additionalProperties": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                    "include": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "exclude": {
+                        "type": "array",
+                        "minItems": 1,
+                        "uniqueItems": true,
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                },
+                "additionalProperties": false
+            }
+        },
         "urlFormat":  {
             "description": "Permalink URL for `identifier` fields. Must contain a {value} placeholder",
             "type": "string"

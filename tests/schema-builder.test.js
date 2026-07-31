@@ -114,7 +114,13 @@ describe('schema-builder', () => {
             okay: 'Okay',
             good: 'Good',
             excellent: 'Excellent',
-            'super fantastic': 'Super Fantastic'
+            chalky: 'Chalky'
+          }
+        },
+        optionsLocationSet: {
+          chalky: {
+            include: ['GB', 'FR'],
+            exclude: ['GB-NIR']
           }
         },
         terms: [
@@ -244,5 +250,11 @@ describe('schema-builder', () => {
     });
     expect(fs.existsSync(_workspace + '/interim/source_strings.yaml')).toBe(true);
     expect(fs.existsSync(_workspace + '/dist')).toBe(true);
+
+    const fieldsOut = JSON.parse(fs.readFileSync(_workspace + '/dist/fields.json', 'utf8'));
+    expect(fieldsOut.water_quality.optionsLocationSet).toEqual({
+      chalky: { include: ['GB', 'FR'], exclude: ['GB-NIR'] }
+    });
+    expect(fieldsOut.water_quality.options).toContain('chalky');
   });
 });
